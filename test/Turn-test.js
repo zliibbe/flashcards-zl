@@ -1,68 +1,77 @@
 const chai = require('chai');
 const Turn = require('../src/Turn');
+const Card = require('../src/Card');
 const expect = chai.expect;
 
 describe('Turn', function() {
-
+    let card;
+    let turn;
+    beforeEach(() => {
+        card = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
+        turn = new Turn('sea otter', card);
+    }) 
     it('should be a function', function() {
-      const turn = new Turn();
-      expect(Turn).to.be.a('function');
+      
+        expect(Turn).to.be.a('function');
     });
 
     it('should be an instance of Turn', function() {
-        const turn = new Turn();
+        
         expect(turn).to.be.an.instanceof(Turn);
     }); 
 
     it('should be able to instatiate with a string that represents a guess', function() {
-        const turn = new Turn('object');
 
-        expect(turn.guess).to.deep.equal('object');
+        expect(turn.guess).to.deep.equal('sea otter');
     });
 
-    it('should be able to instatiate with a string that represents any user\'s guess', function() {
-        const turn = new Turn(usersGuess);
-
-        expect(turn.guess).to.deep.equal(usersGuess);
+    it('should be able to instantiate with a string that represents any user\'s guess', function() {
+     
+        expect(turn.guess).to.deep.equal('sea otter');
     });
 
-    it.skip('should be able to instatiate with a Card object', function() {
-        const turn = new Turn(usersGuess, cardObject);
-
-        expect(turn.currentCard).to.deep.equal(cardObject);
+    it('should be able to instantiate with a Card object', function() {
+    
+        expect(turn.currentCard).to.deep.equal(card);
     });
 
-    it.skip('should be able to return a card', function() {
-        const turn = new Turn(usersGuess, cardObject);
+    it('should be able to return a card', function() {
+        let returnedCardObject = turn.currentCard;
 
-        expect(turn.returnCard).to.equal(cardObject);
+        let currentCardObject = turn.returnCard()
+
+        expect(returnedCardObject).to.equal(currentCardObject);
     });
 
-    it.skip('should be able to evaluate a guess', function() {
-        const card = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
-        const turn = new Turn('pug', card);
+    it('should be able to evaluate an incorrect guess', function() {
+        turn = new Turn('pug', card);
 
-        expect(turn.evaluateGuess).to.be.false;
+        turn.evaluateGuess();
+        
+        expect(turn.correctGuess).to.be.false;
     });
 
-    it.skip('should be able to evaluate a guess', function() {
-        const card = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
-        const turn = new Turn('sea otter', card);
+    it('should be able to evaluate a correct guess', function() {
 
-        expect(turn.evaluateGuess).to.be.true;
+        turn.evaluateGuess()
+
+        expect(turn.correctGuess).to.be.true;
     });
 
-    it.skip('should be able to give feedback regarding a guess', function() {
-        const card = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
-        const turn = new Turn('pug', card);
+    it('should be able to give feedback regarding a guess', function() {
+        turn = new Turn('pug', card);
 
-        expect(turn.giveFeedback).to.equal('incorrect!');
+        turn.evaluateGuess();
+        turn.giveFeedback();
+
+        expect(turn.giveFeedback()).to.equal('incorrect!');
     });
 
-    it.skip('should be able to give feedback regarding a guess', function() {
-        const card = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
-        const turn = new Turn('sea otter', card);
+    it('should be able to give feedback regarding a guess', function() {
+        turn.evaluateGuess();
+        turn.giveFeedback();
 
-        expect(turn.giveFeedback).to.equal('correct!');
+
+        expect(turn.giveFeedback()).to.equal('correct!');
     });
 })
