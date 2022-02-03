@@ -4,8 +4,6 @@ const Card = require('../src/Card');
 const expect = chai.expect;
 
 describe('Turn', function() {
-    let card;
-    let turn;
     beforeEach(() => {
         card = new Card(1, 'What is Robbie\'s favorite animal', ['sea otter', 'pug', 'capybara'], 'sea otter');
         turn = new Turn('sea otter', card);
