@@ -18,25 +18,24 @@ describe('Round', function() {
     deck = new Deck([card1, card2, card3]);
 
     round = new Round(deck);
-    //turn = new Turn('sea otter', card1)
     }) 
 
-    it('should be a function', function() {
+    it('should be an instance of Round class', function() {
       
-      expect(round).to.be.a('instance');
+      expect(round).to.be.instanceOf(Round);
     });
 
-    it.skip('should take in an array of cards as a deck to be played with', function() {
+    it('should take in an array of cards as a deck to be played with', function() {
         expect(round.deck).to.eql(deck);
     })
 
-    it.skip('should return the current card being played', function() {
+    it('should return the current card being played', function() {
         round.returnCurrentCard()
 
-        expect(round.returnCurrentCard()).to.equal('card1');
+        expect(round.returnCurrentCard()).to.equal(card1);
       });
 
-    it.skip('should be able to update turn count regardless of whether the guess is correct or incorrect', function() {
+    it('should be able to update turn count regardless of whether the guess is correct or incorrect', function() {
         round.takeTurn();
         round.takeTurn();
         round.takeTurn();
@@ -44,45 +43,41 @@ describe('Round', function() {
         expect(round.turnCounter).to.equal(3);
     });
 
-    it.skip('should have next card become current card', function() {
+    it('should have next card become current card', function() {
         round.takeTurn();
 
         expect(round.currentCard).to.equal(card2)//it should have the next index in the deck array become the current card
     });
 
-    it.skip('should evaluate and record a guess.', function() {
-        
-        expect(round.takeTurn()).to.equal('correct!');
+    it('should evaluate and record a guess.', function() {
+        expect(round.takeTurn('sea otter')).to.equal('correct!');
     });
 
-    it.skip('should have incorrect guesses stored (via the id) in an array of incorrectGuesses', function() {
-        // push incorrect guess to this.incorrectGuesses array
-        round.takeTurn()
-
-        expect(round.incorrectGuesses().length).to.equal(1);
-
+    it('should have incorrect guesses stored (via the id) in an array of incorrectGuesses', function() {
+        round.takeTurn('pug');
+       
+        expect(round.incorrectGuesses.length).to.equal(1);
     })
 
-    it.skip('should have feedback returned if the guess is incorrect', function() {
-        round.takeTurn()
+    it('should have feedback returned if the guess is incorrect', function() { 
 
-        // expect(Deck).to.be.a('function');
+        expect(round.takeTurn('pug')).to.equal('incorrect!');
     });
 
-    it.skip('should have feedback returned if the guess is correct', function() {
-      
-        // expect(Deck).to.be.a('function');
+    it('should have feedback returned if the guess is correct', function() {
+        
+        expect(round.takeTurn('sea otter')).to.equal('correct!');
     });
 
-    it.skip('should have a method that calculates and returns the percentage of correct guesses', function() {
-      
-        //round.calculatePercentCorrect()
-        // expect(Deck).to.be.a('function');
+    it('should have a method that calculates and returns the percentage of correct guesses', function() {
+        round.takeTurn('pug');
+        round.takeTurn('sea otter');
+
+        expect(round.calculatePercentCorrect()).to.be.a(50);
     }); 
 
     it.skip('should have a method that prints that the round has ended', function() {
-        // ‘** Round over! ** You answered <>% of the questions correctly!’
-        // expect(Deck).to.be.a('function');
-        expect(endRound()).to.equal('** Round over! ** You answered <>% of the questions correctly!')
+        
+        expect(endRound()).to.equal('** Round over! ** You answered 50% of the questions correctly!')
     });    
 })
