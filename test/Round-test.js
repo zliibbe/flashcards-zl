@@ -71,13 +71,15 @@ describe('Round', function() {
 
     it('should have a method that calculates and returns the percentage of correct guesses', function() {
         round.takeTurn('pug');
-        round.takeTurn('sea otter');
+        round.takeTurn('gallbladder');
 
-        expect(round.calculatePercentCorrect()).to.be.a(50);
+        expect(round.calculatePercentCorrect()).to.equal(50);
     }); 
 
-    it.skip('should have a method that prints that the round has ended', function() {
+    it('should have a method that prints that the round has ended', function() {
+        round.takeTurn('pug');
+        round.takeTurn('gallbladder');
         
-        expect(endRound()).to.equal('** Round over! ** You answered 50% of the questions correctly!')
+        expect(round.endRound()).to.equal('** Round over! ** You answered 50% of the questions correctly!')
     });    
 })
