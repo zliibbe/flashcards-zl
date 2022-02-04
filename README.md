@@ -16,7 +16,9 @@ node index.js
 ```
 
 This game is meant to be played entirely in the terminal. You will be asked questions that you can answer by typing the number of the answer you think is correct. You will then receive feedback as to whether your answer was 
-'correct' or 'incorrect'. At the end of a round, you will receive feedback letting you know the percent of questions you've answered correctly.
+'correct' or 'incorrect'. At the end of a round, you will receive feedback letting you know the percent of questions you've answered correctly. 
+
+Enter the number of what you think is the correct guess and press enter. Press enter again for the next question. The game will let you know when you've finished.
 
 ## Languages Used
 
