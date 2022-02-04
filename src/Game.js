@@ -11,12 +11,8 @@ class Game {
   }
 
   start() {
-    //creates cards
-    //const map1 = array1.map(x => x * 2)
     const cards = prototypeQuestions.map(card => new Card(card.id, card.question, card.answers, card.correctAnswer));
-    // put cards into deck
     const deck = new Deck(cards)
-    // creates a new Round using deck
     this.currentRound = new Round(deck);
     this.printMessage(deck, this.currentRound);
     this.printQuestion(this.currentRound);
