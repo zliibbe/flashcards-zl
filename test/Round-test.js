@@ -79,7 +79,7 @@ describe('Round', function() {
     it('should have a method that prints that the round has ended', function() {
         round.takeTurn('pug');
         round.takeTurn('gallbladder');
-        
+
         expect(round.endRound()).to.equal('** Round over! ** You answered 50% of the questions correctly!')
     });    
 })
